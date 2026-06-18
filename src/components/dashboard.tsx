@@ -1,16 +1,11 @@
-import { Button } from "@/components/ui/button"
-
 import {
     Card,
     CardAction,
-    CardContent,
     CardDescription,
     CardFooter,
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import { TrendingUp } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 
@@ -25,7 +20,7 @@ export function Dashboard() {
                 </p>
             </header>
 
-            <div className="grid  gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                 <Card>
                     <CardHeader>
                         <CardDescription>Launches YTD</CardDescription>
@@ -38,6 +33,51 @@ export function Dashboard() {
                     </CardHeader>
                     <CardFooter className="text-muted-foreground text-sm">
                         vs same period 2025
+                    </CardFooter>
+                </Card>
+
+                <Card>
+                    <CardHeader>
+                        <CardDescription>Mission Success</CardDescription>
+                        <CardTitle className="text-2xl font-semibold tabular-nums">99.2%</CardTitle>
+                        <CardAction>
+                            <Badge variant="outline" className="text-emerald-500">
+                                <TrendingUp className="size-3" /> +0.4%
+                            </Badge>
+                        </CardAction>
+                    </CardHeader>
+                    <CardFooter className="text-muted-foreground text-sm">
+                        93 of 94 nominal
+                    </CardFooter>
+                </Card>
+
+                <Card>
+                    <CardHeader>
+                        <CardDescription>Payload to orbit</CardDescription>
+                        <CardTitle className="text-2xl font-semibold tabular-nums">1,284 t</CardTitle>
+                        <CardAction>
+                            <Badge variant="outline" className="text-emerald-500">
+                                <TrendingUp className="size-3" /> +22%
+                            </Badge>
+                        </CardAction>
+                    </CardHeader>
+                    <CardFooter className="text-muted-foreground text-sm">
+                        ~83% of global mass
+                    </CardFooter>
+                </Card>
+
+                <Card>
+                    <CardHeader>
+                        <CardDescription>SPCX · market cap</CardDescription>
+                        <CardTitle className="text-2xl font-semibold tabular-nums">$2.04 T</CardTitle>
+                        <CardAction>
+                            <Badge variant="outline" className="text-emerald-500">
+                                <TrendingUp className="size-3" /> +9.8%
+                            </Badge>
+                        </CardAction>
+                    </CardHeader>
+                    <CardFooter className="text-muted-foreground text-sm">
+                        since June 12 debut
                     </CardFooter>
                 </Card>
             </div>
