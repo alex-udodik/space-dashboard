@@ -2,21 +2,20 @@ import { type NextRequest } from "next/server";
 import { updateSession } from "@/lib/supabase/middleware";
 
 // Next.js 16 renamed the "middleware" file convention to "proxy".
-// This runs on every matched request to keep the Supabase session fresh.
+// This runs on the matched requests below to keep the Supabase session fresh.
 export async function proxy(request: NextRequest) {
   return await updateSession(request);
 }
 
 export const config = {
-  matcher: [
-    /*
-     * Match all request paths except:
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     * - common image/asset extensions
-     * Add public files here as needed.
-     */
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico)$).*)",
-  ],
+  /*
+   * Only run the Supabase session refresh on routes that actually depend on
+   * the auth session. Public, static pages (like the dashboard at "/") are
+   * intentionally excluded so they never pay the proxy cost — and can't be
+   * taken down by a Supabase outage or a missing env var.
+   *
+   * Add protected / auth-aware route prefixes here as you build them, e.g.
+   * "/account/:path*", "/settings/:path*".
+   */
+  matcher: ["/auth/:path*", "/login"],
 };
