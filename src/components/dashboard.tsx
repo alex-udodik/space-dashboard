@@ -12,6 +12,9 @@ import { LaunchCadenceChart } from "@/components/launch-cadence-chart"
 import { PayloadOrbitDonutChart } from "./payload-orbit-donut-chart"
 import { MissionMixStackedbarChart } from "./mission-mix-stacked-bar-chart"
 import { StarLinkChart } from "./starlink-chart"
+import { BoosterFleetBarChart } from "./booster-fleet-leaders-bar-chart"
+import { SPCXPriceLineChart } from "./spcx-price-line-chart"
+
 
 export function Dashboard() {
     return (
@@ -91,6 +94,9 @@ export function Dashboard() {
             {/* <MissionMixStackedbarChart /> */}
 
             <StarLinkChart />
+            <BoosterFleetBarChart />
+            <SPCXPriceLineChart />
+
             <div className="rounded-xl border bg-card p-5 text-card-foreground shadow-sm">
                 <h2 className="text-base font-semibold">Recent activity</h2>
                 <p className="mt-2 text-sm text-muted-foreground">
