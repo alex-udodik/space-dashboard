@@ -8,7 +8,10 @@ import {
 } from "@/components/ui/card"
 import { TrendingUp } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
-
+import { LaunchCadenceChart } from "@/components/launch-cadence-chart"
+import { PayloadOrbitDonutChart } from "./payload-orbit-donut-chart"
+import { MissionMixStackedbarChart } from "./mission-mix-stacked-bar-chart"
+import { StarLinkChart } from "./starlink-chart"
 
 export function Dashboard() {
     return (
@@ -82,6 +85,12 @@ export function Dashboard() {
                 </Card>
             </div>
 
+
+            <LaunchCadenceChart />
+            <PayloadOrbitDonutChart />
+            {/* <MissionMixStackedbarChart /> */}
+
+            <StarLinkChart />
             <div className="rounded-xl border bg-card p-5 text-card-foreground shadow-sm">
                 <h2 className="text-base font-semibold">Recent activity</h2>
                 <p className="mt-2 text-sm text-muted-foreground">
