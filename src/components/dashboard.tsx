@@ -14,7 +14,7 @@ import { MissionMixStackedbarChart } from "./mission-mix-stacked-bar-chart"
 import { StarLinkChart } from "./starlink-chart"
 import { BoosterFleetBarChart } from "./booster-fleet-leaders-bar-chart"
 import { SPCXPriceLineChart } from "./spcx-price-line-chart"
-
+import { RecentLaunchesTable } from "./recent-launches-table"
 
 export function Dashboard() {
     return (
@@ -89,13 +89,22 @@ export function Dashboard() {
             </div>
 
 
+
             <LaunchCadenceChart />
-            <PayloadOrbitDonutChart />
+
+            <div className="grid gap-4 lg:grid-cols-2">
+                <PayloadOrbitDonutChart />
+                <StarLinkChart />
+                <BoosterFleetBarChart />
+                <SPCXPriceLineChart />
+            </div>
+
+
             {/* <MissionMixStackedbarChart /> */}
 
-            <StarLinkChart />
-            <BoosterFleetBarChart />
-            <SPCXPriceLineChart />
+
+
+            <RecentLaunchesTable />
 
             <div className="rounded-xl border bg-card p-5 text-card-foreground shadow-sm">
                 <h2 className="text-base font-semibold">Recent activity</h2>
