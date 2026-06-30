@@ -8,19 +8,19 @@ import {
 } from "@/components/ui/card"
 import { TrendingUp } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
-import { LaunchCadenceChart } from "@/components/launch-cadence-chart"
-import { PayloadOrbitDonutChart } from "./payload-orbit-donut-chart"
-import { MissionMixStackedbarChart } from "./mission-mix-stacked-bar-chart"
-import { StarLinkChart } from "./starlink-chart"
-import { BoosterFleetBarChart } from "./booster-fleet-leaders-bar-chart"
-import { SPCXPriceLineChart } from "./spcx-price-line-chart"
-import { RecentLaunchesTable } from "./recent-launches-table"
+import { LaunchCadenceChart } from "@/components/dashboard/charts/launch-cadence-chart"
+import { PayloadOrbitDonutChart } from "./charts/payload-orbit-donut-chart"
+import { MissionMixStackedbarChart } from "./charts/mission-mix-stacked-bar-chart"
+import { StarLinkChart } from "./charts/starlink-chart"
+import { BoosterFleetBarChart } from "./charts/booster-fleet-leaders-bar-chart"
+import { SPCXPriceLineChart } from "./charts/spcx-price-line-chart"
+import { RecentLaunchesTable } from "./charts/recent-launches-table"
 
 export function Dashboard() {
     return (
         <div className="flex flex-1 flex-col gap-6 p-6">
             <header className="flex flex-col gap-1">
-                <h1 className="text-2xl font-semibold tracking-tight">Dashboard</h1>
+                <h1 className="text-2xl font-semibold tracking-tight">Launch operations</h1>
                 <p className="text-sm text-muted-foreground">
                     Welcome back — here&apos;s an overview of your workspace.
                 </p>
