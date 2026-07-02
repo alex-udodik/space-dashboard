@@ -71,9 +71,24 @@ export function SPCXPriceLineChart() {
                             cursor={false}
                             content={<ChartTooltipContent hideLabel />}
                         />
+                        <defs>
+                            <linearGradient id="fillClose" x1="0" y1="0" x2="0" y2="1">
+                                <stop
+                                    offset="5%"
+                                    stopColor="var(--color-close)"
+                                    stopOpacity={0.8}
+                                />
+                                <stop
+                                    offset="95%"
+                                    stopColor="var(--color-close)"
+                                    stopOpacity={0.1}
+                                />
+                            </linearGradient>
+                        </defs>
                         <Area
                             dataKey="close"
                             type="natural"
+                            fill="url(#fillClose)"
                             stroke="var(--color-close)"
                             strokeWidth={2}
                             dot={false}
