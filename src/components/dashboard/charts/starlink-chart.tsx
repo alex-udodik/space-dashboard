@@ -1,7 +1,9 @@
 "use client"
 
-import { TrendingUp } from "lucide-react"
+import { TrendingDown, TrendingUp } from "lucide-react"
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts"
+import { useState } from 'react';
+import { useEffect } from "react";
 
 import {
     Card,
@@ -20,27 +22,26 @@ import {
 
 export const description = "An area chart with gradient fill"
 
-const chartData = [
-    { month: "January", desktop: 186, mobile: 80 },
-    { month: "February", desktop: 305, mobile: 200 },
-    { month: "March", desktop: 237, mobile: 120 },
-    { month: "April", desktop: 73, mobile: 190 },
-    { month: "May", desktop: 209, mobile: 130 },
-    { month: "June", desktop: 214, mobile: 140 },
-]
-
 const chartConfig = {
-    desktop: {
-        label: "Desktop",
-        color: "var(--chart-1)",
-    },
-    mobile: {
-        label: "Mobile",
-        color: "var(--chart-2)",
-    },
+    v1: { label: "v1 (Gen1)", color: "var(--chart-2)" },
+    v2: { label: "v2 (Gen2)", color: "var(--chart-1)" },
 } satisfies ChartConfig
 
 export function StarLinkChart() {
+
+    const [starLinkdata, setStarLinkdata] = useState<{ month: string; v1: number; v2: number }[]>([])
+    useEffect(() => {
+        fetch("/api/star-link")
+            .then((res) => res.json())
+            .then((json) => setStarLinkdata(json.data))
+    }, [])
+
+    const first = starLinkdata[0]
+    const last = starLinkdata.at(-1)
+    const firstTotal = first ? first.v1 + first.v2 : 0
+    const lastTotal = last ? last.v1 + last.v2 : 0
+    const growth = firstTotal ? ((lastTotal - firstTotal) / firstTotal) * 100 : 0
+
     return (
         <Card>
             <CardHeader>
@@ -53,7 +54,7 @@ export function StarLinkChart() {
                 <ChartContainer config={chartConfig}>
                     <AreaChart
                         accessibilityLayer
-                        data={chartData}
+                        data={starLinkdata}
                         margin={{
                             left: 12,
                             right: 12,
@@ -69,45 +70,45 @@ export function StarLinkChart() {
                         />
                         <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
                         <defs>
-                            <linearGradient id="fillDesktop" x1="0" y1="0" x2="0" y2="1">
+                            <linearGradient id="fillV1" x1="0" y1="0" x2="0" y2="1">
                                 <stop
                                     offset="5%"
-                                    stopColor="var(--color-desktop)"
+                                    stopColor="var(--color-v1)"
                                     stopOpacity={0.8}
                                 />
                                 <stop
                                     offset="95%"
-                                    stopColor="var(--color-desktop)"
+                                    stopColor="var(--color-v1)"
                                     stopOpacity={0.1}
                                 />
                             </linearGradient>
-                            <linearGradient id="fillMobile" x1="0" y1="0" x2="0" y2="1">
+                            <linearGradient id="fillV2" x1="0" y1="0" x2="0" y2="1">
                                 <stop
                                     offset="5%"
-                                    stopColor="var(--color-mobile)"
+                                    stopColor="var(--color-v2)"
                                     stopOpacity={0.8}
                                 />
                                 <stop
                                     offset="95%"
-                                    stopColor="var(--color-mobile)"
+                                    stopColor="var(--color-v2)"
                                     stopOpacity={0.1}
                                 />
                             </linearGradient>
                         </defs>
                         <Area
-                            dataKey="mobile"
+                            dataKey="v1"
                             type="natural"
-                            fill="url(#fillMobile)"
+                            fill="url(#fillV1)"
                             fillOpacity={0.4}
-                            stroke="var(--color-mobile)"
+                            stroke="var(--color-v1)"
                             stackId="a"
                         />
                         <Area
-                            dataKey="desktop"
+                            dataKey="v2"
                             type="natural"
-                            fill="url(#fillDesktop)"
+                            fill="url(#fillV2)"
                             fillOpacity={0.4}
-                            stroke="var(--color-desktop)"
+                            stroke="var(--color-v2)"
                             stackId="a"
                         />
                     </AreaChart>
@@ -117,10 +118,8 @@ export function StarLinkChart() {
                 <div className="flex w-full items-start gap-2 text-sm">
                     <div className="grid gap-2">
                         <div className="flex items-center gap-2 leading-none font-medium">
-                            Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-                        </div>
-                        <div className="flex items-center gap-2 leading-none text-muted-foreground">
-                            January - June 2024
+                            Trending {growth > 0 ? "up" : "down"} by {Math.abs(growth).toFixed(1)}%
+                            {growth > 0 ? <TrendingUp className="h-4 w-4" /> : <TrendingDown className="h-4 w-4" />}
                         </div>
                     </div>
                 </div>
