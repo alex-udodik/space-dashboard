@@ -1,7 +1,9 @@
 "use client"
 
 import { TrendingUp } from "lucide-react"
-import { CartesianGrid, Line, LineChart, XAxis } from "recharts"
+import { CartesianGrid, Line, LineChart, XAxis, Area, AreaChart } from "recharts"
+import { useState } from 'react';
+import { useEffect } from "react";
 
 import {
     Card,
@@ -20,23 +22,27 @@ import {
 
 export const description = "A line chart"
 
-const chartData = [
-    { month: "January", desktop: 186 },
-    { month: "February", desktop: 305 },
-    { month: "March", desktop: 237 },
-    { month: "April", desktop: 73 },
-    { month: "May", desktop: 209 },
-    { month: "June", desktop: 214 },
-]
-
 const chartConfig = {
-    desktop: {
-        label: "Desktop",
+    close: {
+        label: "Close($)",
         color: "var(--chart-1)",
     },
 } satisfies ChartConfig
 
 export function SPCXPriceLineChart() {
+    const [priceData, setPriceData] = useState<{ month: string; close: number; }[]>([])
+    useEffect(() => {
+        fetch("/api/spcx-price")
+            .then((res) => res.json())
+            .then((json) => setPriceData(json.data))
+    }, [])
+
+    const latest = priceData.at(-1)?.close ?? 0;
+    const prev = priceData.at(-2)?.close ?? 0;
+    const change = prev ? ((latest - prev) / prev) * 100 : 0;
+    const up = change >= 0
+
+
     return (
         <Card>
             <CardHeader>
@@ -45,9 +51,9 @@ export function SPCXPriceLineChart() {
             </CardHeader>
             <CardContent>
                 <ChartContainer config={chartConfig}>
-                    <LineChart
+                    <AreaChart
                         accessibilityLayer
-                        data={chartData}
+                        data={priceData}
                         margin={{
                             left: 12,
                             right: 12,
@@ -65,19 +71,19 @@ export function SPCXPriceLineChart() {
                             cursor={false}
                             content={<ChartTooltipContent hideLabel />}
                         />
-                        <Line
-                            dataKey="desktop"
+                        <Area
+                            dataKey="close"
                             type="natural"
-                            stroke="var(--color-desktop)"
+                            stroke="var(--color-close)"
                             strokeWidth={2}
                             dot={false}
                         />
-                    </LineChart>
+                    </AreaChart>
                 </ChartContainer>
             </CardContent>
             <CardFooter className="flex-col items-start gap-2 text-sm">
                 <div className="flex gap-2 leading-none font-medium">
-                    Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
+                    Trending {up ? "up" : "down"} by {Math.abs(change).toFixed(1)}% this month<TrendingUp className="h-4 w-4" />
                 </div>
                 <div className="leading-none text-muted-foreground">
                     Showing total visitors for the last 6 months
