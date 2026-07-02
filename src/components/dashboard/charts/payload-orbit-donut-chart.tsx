@@ -1,13 +1,12 @@
 "use client"
 
-import { TrendingUp } from "lucide-react"
+import * as React from "react"
 import { Pie, PieChart } from "recharts"
 
 import {
     Card,
     CardContent,
     CardDescription,
-    CardFooter,
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
@@ -20,32 +19,24 @@ import {
 
 export const description = "A donut chart"
 
-const chartData = [
-    { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
-    { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
-    { browser: "firefox", visitors: 187, fill: "var(--color-firefox)" },
-    { browser: "edge", visitors: 173, fill: "var(--color-edge)" },
-    { browser: "other", visitors: 90, fill: "var(--color-other)" },
-]
-
 const chartConfig = {
-    visitors: {
-        label: "Visitors",
+    mass: {
+        label: "Mass (t)",
     },
-    chrome: {
-        label: "Chrome",
+    leo: {
+        label: "LEO",
         color: "var(--chart-1)",
     },
-    safari: {
-        label: "Safari",
+    sso: {
+        label: "SSO",
         color: "var(--chart-2)",
     },
-    firefox: {
-        label: "Firefox",
+    gto: {
+        label: "GTO",
         color: "var(--chart-3)",
     },
-    edge: {
-        label: "Edge",
+    meo: {
+        label: "MEO",
         color: "var(--chart-4)",
     },
     other: {
@@ -55,6 +46,16 @@ const chartConfig = {
 } satisfies ChartConfig
 
 export function PayloadOrbitDonutChart() {
+    const [chartData, setChartData] = React.useState<
+        { orbit: string; mass: number; fill: string }[]
+    >([])
+
+    React.useEffect(() => {
+        fetch("/api/payload-orbit")
+            .then((res) => res.json())
+            .then((json) => setChartData(json.data))
+    }, [])
+
     return (
         <Card className="flex flex-col">
             <CardHeader className="items-center pb-0">
@@ -73,8 +74,8 @@ export function PayloadOrbitDonutChart() {
                         />
                         <Pie
                             data={chartData}
-                            dataKey="visitors"
-                            nameKey="browser"
+                            dataKey="mass"
+                            nameKey="orbit"
                             innerRadius={60}
                         />
                     </PieChart>

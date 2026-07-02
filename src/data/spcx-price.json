@@ -1,0 +1,10 @@
+{
+  "data": [
+    { "month": "January", "close": 152.30 },
+    { "month": "February", "close": 161.80 },
+    { "month": "March", "close": 158.40 },
+    { "month": "April", "close": 172.60 },
+    { "month": "May", "close": 180.00 },
+    { "month": "June", "close": 197.64 }
+  ]
+}

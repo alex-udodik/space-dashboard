@@ -41,7 +41,7 @@ export function SPCXPriceLineChart() {
         <Card>
             <CardHeader>
                 <CardTitle>SPCX price</CardTitle>
-                <CardDescription>Daily close since Nasdaq debut</CardDescription>
+                <CardDescription>Monthly close, 2026</CardDescription>
             </CardHeader>
             <CardContent>
                 <ChartContainer config={chartConfig}>

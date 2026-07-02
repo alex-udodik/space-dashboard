@@ -1,0 +1,9 @@
+{
+  "data": [
+    { "booster": "B1067", "flights": 26, "fill": "var(--color-b1067)" },
+    { "booster": "B1071", "flights": 24, "fill": "var(--color-b1071)" },
+    { "booster": "B1063", "flights": 23, "fill": "var(--color-b1063)" },
+    { "booster": "B1069", "flights": 22, "fill": "var(--color-b1069)" },
+    { "booster": "B1080", "flights": 20, "fill": "var(--color-b1080)" }
+  ]
+}

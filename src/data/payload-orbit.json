@@ -1,0 +1,9 @@
+{
+  "data": [
+    { "orbit": "leo", "mass": 984, "fill": "var(--color-leo)" },
+    { "orbit": "sso", "mass": 142, "fill": "var(--color-sso)" },
+    { "orbit": "gto", "mass": 88, "fill": "var(--color-gto)" },
+    { "orbit": "meo", "mass": 46, "fill": "var(--color-meo)" },
+    { "orbit": "other", "mass": 24, "fill": "var(--color-other)" }
+  ]
+}

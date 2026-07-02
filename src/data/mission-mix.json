@@ -1,0 +1,10 @@
+{
+  "data": [
+    { "month": "January", "starlink": 8, "commercial": 3, "government": 2 },
+    { "month": "February", "starlink": 9, "commercial": 2, "government": 2 },
+    { "month": "March", "starlink": 7, "commercial": 4, "government": 1 },
+    { "month": "April", "starlink": 10, "commercial": 3, "government": 2 },
+    { "month": "May", "starlink": 8, "commercial": 3, "government": 3 },
+    { "month": "June", "starlink": 9, "commercial": 4, "government": 2 }
+  ]
+}
