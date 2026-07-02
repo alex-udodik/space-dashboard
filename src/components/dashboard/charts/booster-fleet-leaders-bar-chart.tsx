@@ -1,7 +1,10 @@
 "use client"
 
 import { TrendingUp } from "lucide-react"
-import { Bar, BarChart, XAxis, YAxis } from "recharts"
+import { Bar, BarChart, Cell, XAxis, YAxis } from "recharts"
+import { useState } from 'react';
+import { useEffect } from "react";
+
 
 import {
     Card,
@@ -20,41 +23,24 @@ import {
 
 export const description = "A mixed bar chart"
 
-const chartData = [
-    { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
-    { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
-    { browser: "firefox", visitors: 187, fill: "var(--color-firefox)" },
-    { browser: "edge", visitors: 173, fill: "var(--color-edge)" },
-    { browser: "other", visitors: 90, fill: "var(--color-other)" },
-]
-
 const chartConfig = {
-    visitors: {
-        label: "Visitors",
-    },
-    chrome: {
-        label: "Chrome",
-        color: "var(--chart-1)",
-    },
-    safari: {
-        label: "Safari",
-        color: "var(--chart-2)",
-    },
-    firefox: {
-        label: "Firefox",
-        color: "var(--chart-3)",
-    },
-    edge: {
-        label: "Edge",
-        color: "var(--chart-4)",
-    },
-    other: {
-        label: "Other",
-        color: "var(--chart-5)",
-    },
+    flights: { label: "Flights" },
 } satisfies ChartConfig
 
 export function BoosterFleetBarChart() {
+
+    const [boosterData, setBoosterData] = useState<{ booster: string; flights: number; }[]>([])
+    useEffect(() => {
+        fetch("/api/booster-fleet-leaders")
+            .then((res) => res.json())
+            .then((json) => setBoosterData(json.data))
+    }, [])
+
+    const flightMax = Math.max(...boosterData.map((d) => d.flights))
+    const leader = boosterData.reduce(
+        (best, d) => (d.flights > best.flights ? d : best),
+        boosterData[0]
+    )
     return (
         <Card>
             <CardHeader>
@@ -65,38 +51,35 @@ export function BoosterFleetBarChart() {
                 <ChartContainer config={chartConfig}>
                     <BarChart
                         accessibilityLayer
-                        data={chartData}
+                        data={boosterData}
                         layout="vertical"
                         margin={{
                             left: 0,
                         }}
                     >
                         <YAxis
-                            dataKey="browser"
+                            dataKey="booster"
                             type="category"
                             tickLine={false}
                             tickMargin={10}
                             axisLine={false}
-                            tickFormatter={(value) =>
-                                chartConfig[value as keyof typeof chartConfig]?.label
-                            }
+                            tickFormatter={(value) => value}
                         />
-                        <XAxis dataKey="visitors" type="number" hide />
+                        <XAxis dataKey="flights" type="number" hide />
                         <ChartTooltip
                             cursor={false}
                             content={<ChartTooltipContent hideLabel />}
                         />
-                        <Bar dataKey="visitors" radius={5} />
+                        <Bar dataKey="flights" radius={5}>
+                            {boosterData.map((d, i) => (
+                                <Cell key={d.booster} fill={`var(--chart-${i + 1})`} />
+                            ))}
+                        </Bar>
                     </BarChart>
                 </ChartContainer>
             </CardContent>
             <CardFooter className="flex-col items-start gap-2 text-sm">
-                <div className="flex gap-2 leading-none font-medium">
-                    Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-                </div>
-                <div className="leading-none text-muted-foreground">
-                    Showing total visitors for the last 6 months
-                </div>
+                {leader?.booster} leads the fleet with {leader?.flights} flights
             </CardFooter>
         </Card>
     )

@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Pie, PieChart } from "recharts"
+import { Cell, Pie, PieChart } from "recharts"
 
 import {
     Card,
@@ -20,34 +20,17 @@ import {
 export const description = "A donut chart"
 
 const chartConfig = {
-    mass: {
-        label: "Mass (t)",
-    },
-    leo: {
-        label: "LEO",
-        color: "var(--chart-1)",
-    },
-    sso: {
-        label: "SSO",
-        color: "var(--chart-2)",
-    },
-    gto: {
-        label: "GTO",
-        color: "var(--chart-3)",
-    },
-    meo: {
-        label: "MEO",
-        color: "var(--chart-4)",
-    },
-    other: {
-        label: "Other",
-        color: "var(--chart-5)",
-    },
+    mass: { label: "Mass (t)" },
+    leo: { label: "LEO" },
+    sso: { label: "SSO" },
+    gto: { label: "GTO" },
+    meo: { label: "MEO" },
+    other: { label: "Other" },
 } satisfies ChartConfig
 
 export function PayloadOrbitDonutChart() {
     const [chartData, setChartData] = React.useState<
-        { orbit: string; mass: number; fill: string }[]
+        { orbit: string; mass: number }[]
     >([])
 
     React.useEffect(() => {
@@ -77,7 +60,11 @@ export function PayloadOrbitDonutChart() {
                             dataKey="mass"
                             nameKey="orbit"
                             innerRadius={60}
-                        />
+                        >
+                            {chartData.map((d, i) => (
+                                <Cell key={d.orbit} fill={`var(--chart-${i + 1})`} />
+                            ))}
+                        </Pie>
                     </PieChart>
                 </ChartContainer>
             </CardContent>
