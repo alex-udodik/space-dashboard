@@ -15,6 +15,7 @@ import { StarLinkChart } from "./charts/starlink-chart"
 import { BoosterFleetBarChart } from "./charts/booster-fleet-leaders-bar-chart"
 import { SPCXPriceLineChart } from "./charts/spcx-price-line-chart"
 import { RecentLaunchesTable } from "./charts/recent-launches-table"
+import { CapabilityProfileChart } from "./charts/capability-profile-chart"
 
 export function Dashboard() {
     return (
@@ -98,6 +99,7 @@ export function Dashboard() {
                 <BoosterFleetBarChart />
                 <SPCXPriceLineChart />
                 <MissionMixStackedbarChart />
+                <CapabilityProfileChart />
             </div>
 
 
