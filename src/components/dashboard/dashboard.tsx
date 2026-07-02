@@ -92,15 +92,16 @@ export function Dashboard() {
 
             <LaunchCadenceChart />
 
-            <div className="grid gap-4 lg:grid-cols-2">
+            <div className="grid gap-4 lg:grid-cols-3">
                 <PayloadOrbitDonutChart />
                 <StarLinkChart />
                 <BoosterFleetBarChart />
                 <SPCXPriceLineChart />
+                <MissionMixStackedbarChart />
             </div>
 
 
-            <MissionMixStackedbarChart />
+
 
 
 
