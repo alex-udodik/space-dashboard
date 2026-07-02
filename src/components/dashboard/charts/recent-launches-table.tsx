@@ -1,6 +1,9 @@
 "use client"
 
 import { Badge } from "@/components/ui/badge"
+import { useState } from 'react';
+import { useEffect } from "react";
+
 
 import {
     Card,
@@ -31,62 +34,6 @@ type Launch = {
     outcome: "success" | "flight-test" | "scheduled"
 }
 
-const launches: Launch[] = [
-    {
-        mission: "Starlink 12-7",
-        vehicle: "Falcon 9",
-        site: "SLC-40",
-        orbit: "LEO",
-        payload: "17.5 t",
-        booster: "B1067 · flight 24",
-        outcome: "success",
-    },
-    {
-        mission: "USSF-124",
-        vehicle: "Falcon 9",
-        site: "LC-39A",
-        orbit: "MEO",
-        payload: "6.2 t",
-        booster: "B1080 · flight 11",
-        outcome: "success",
-    },
-    {
-        mission: "Polaris Dawn II",
-        vehicle: "Falcon 9",
-        site: "LC-39A",
-        orbit: "LEO",
-        payload: "12.9 t",
-        booster: "B1083 · flight 7",
-        outcome: "success",
-    },
-    {
-        mission: "Flight 11",
-        vehicle: "Starship",
-        site: "Starbase",
-        orbit: "Suborbital",
-        payload: "—",
-        booster: "B16 · flight 2",
-        outcome: "flight-test",
-    },
-    {
-        mission: "Transporter-14",
-        vehicle: "Falcon 9",
-        site: "SLC-4E",
-        orbit: "SSO",
-        payload: "9.1 t",
-        booster: "B1071 · flight 22",
-        outcome: "success",
-    },
-    {
-        mission: "Eutelsat 36E",
-        vehicle: "Falcon Heavy",
-        site: "LC-39A",
-        orbit: "GTO",
-        payload: "5.8 t",
-        booster: "B1085 · flight 3",
-        outcome: "scheduled",
-    },
-]
 
 function OutcomeBadge({ status }: { status: "success" | "flight-test" | "scheduled" }) {
     const styles = {
@@ -105,14 +52,23 @@ function OutcomeBadge({ status }: { status: "success" | "flight-test" | "schedul
 
 
 export function RecentLaunchesTable() {
+
+    const [launchData, setLaunchData] = useState<Launch[]>([])
+    useEffect(() => {
+        fetch("/api/recent-launches")
+            .then((res) => res.json())
+            .then((json) => setLaunchData(json.data))
+    }, [])
+
+
     return (
         <Card>
             <CardHeader className="flex flex-row items-center justify-between">
                 <div className="grid gap-1">
                     <CardTitle>Recent launches</CardTitle>
-                    <CardDescription>Latest 6 missions across all pads</CardDescription>
+                    <CardDescription>Latest {launchData.length} missions across all pads</CardDescription>
                 </div>
-                <Badge variant="outline">live feed</Badge>
+
             </CardHeader>
             <CardContent>
                 <Table>
@@ -128,7 +84,7 @@ export function RecentLaunchesTable() {
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        {launches.map((m) => (
+                        {launchData.map((m) => (
                             <TableRow key={m.mission}>
                                 <TableCell className="font-medium">{m.mission}</TableCell>
                                 <TableCell>{m.vehicle}</TableCell>
