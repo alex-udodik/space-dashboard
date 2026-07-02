@@ -27,6 +27,15 @@ const chartConfig = {
     flights: { label: "Flights" },
 } satisfies ChartConfig
 
+// Light blue -> purple ramp, matching the tone used across the other charts
+const barColors = [
+    "oklch(0.72 0.10 250)",
+    "oklch(0.70 0.12 263)",
+    "oklch(0.69 0.13 276)",
+    "oklch(0.68 0.14 288)",
+    "oklch(0.67 0.15 298)",
+]
+
 export function BoosterFleetBarChart() {
 
     const [boosterData, setBoosterData] = useState<{ booster: string; flights: number; }[]>([])
@@ -72,7 +81,7 @@ export function BoosterFleetBarChart() {
                         />
                         <Bar dataKey="flights" radius={5}>
                             {boosterData.map((d, i) => (
-                                <Cell key={d.booster} fill={`var(--chart-${i + 1})`} />
+                                <Cell key={d.booster} fill={barColors[i % barColors.length]} />
                             ))}
                         </Bar>
                     </BarChart>

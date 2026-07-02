@@ -100,7 +100,7 @@ export function Dashboard() {
             </div>
 
 
-            {/* <MissionMixStackedbarChart /> */}
+            <MissionMixStackedbarChart />
 
 
 
