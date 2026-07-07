@@ -23,6 +23,7 @@ import {
     SidebarMenuItem,
 } from "@/components/ui/sidebar"
 
+
 // Primary navigation links.
 const mainNav = [
     { title: "Dashboard", url: "/", icon: LayoutDashboard },
@@ -98,6 +99,9 @@ export function AppSidebar() {
                             <User />
                             <span>Account</span>
                         </SidebarMenuButton>
+                    </SidebarMenuItem>
+                    <SidebarMenuItem>
+
                     </SidebarMenuItem>
                 </SidebarMenu>
             </SidebarFooter>

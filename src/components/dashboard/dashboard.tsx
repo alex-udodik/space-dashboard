@@ -16,15 +16,21 @@ import { BoosterFleetBarChart } from "./charts/booster-fleet-leaders-bar-chart"
 import { SPCXPriceLineChart } from "./charts/spcx-price-line-chart"
 import { RecentLaunchesTable } from "./charts/recent-launches-table"
 import { CapabilityProfileChart } from "./charts/capability-profile-chart"
+import { LightDarkSwitch } from "@/components/light-dark-toggle-switch"
 
 export function Dashboard() {
     return (
+
         <div className="flex flex-1 flex-col gap-6 p-6">
+            <div className="self-end px-2 py-1.5">
+                <LightDarkSwitch />
+            </div>
             <header className="flex flex-col gap-1">
                 <h1 className="text-2xl font-semibold tracking-tight">Launch operations</h1>
                 <p className="text-sm text-muted-foreground">
                     Welcome back — here&apos;s an overview of your workspace.
                 </p>
+
             </header>
 
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
