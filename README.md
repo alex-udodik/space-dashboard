@@ -1,3 +1,5 @@
+https://space-dashboard-indol.vercel.app/
+
 # space-dashboard
 
 A barebones starter template: **Next.js (App Router) · TypeScript · Tailwind CSS · shadcn/ui · Supabase (auth + storage)**.
