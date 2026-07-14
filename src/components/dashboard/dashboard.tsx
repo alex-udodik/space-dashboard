@@ -18,6 +18,8 @@ import { RecentLaunchesTable } from "./charts/recent-launches-table"
 import { CapabilityProfileChart } from "./charts/capability-profile-chart"
 import { LaunchGlobe } from "./charts/launch-globe"
 import { LightDarkSwitch } from "@/components/light-dark-toggle-switch"
+import { CountDownNextLaunch } from "@/components/dashboard/charts/countdown-next-launch"
+
 
 export function Dashboard() {
     return (
@@ -109,6 +111,7 @@ export function Dashboard() {
                 <SPCXPriceLineChart />
                 <MissionMixStackedbarChart />
                 <CapabilityProfileChart />
+                <CountDownNextLaunch />
             </div>
 
 
