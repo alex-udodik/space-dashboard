@@ -16,6 +16,7 @@ import { BoosterFleetBarChart } from "./charts/booster-fleet-leaders-bar-chart"
 import { SPCXPriceLineChart } from "./charts/spcx-price-line-chart"
 import { RecentLaunchesTable } from "./charts/recent-launches-table"
 import { CapabilityProfileChart } from "./charts/capability-profile-chart"
+import { LaunchGlobe } from "./charts/launch-globe"
 import { LightDarkSwitch } from "@/components/light-dark-toggle-switch"
 
 export function Dashboard() {
@@ -32,6 +33,8 @@ export function Dashboard() {
                 </p>
 
             </header>
+
+            <LaunchGlobe />
 
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                 <Card>

@@ -28,15 +28,10 @@ import {
 const mainNav = [
     { title: "Dashboard", url: "/", icon: LayoutDashboard },
     { title: "Home", url: "/home", icon: Home },
-    { title: "Inbox", url: "/inbox", icon: Inbox },
     { title: "Search", url: "/search", icon: Search },
-]
-
-// Secondary group of links.
-const projectNav = [
-    { title: "Projects", url: "/projects", icon: Folder },
     { title: "Settings", url: "/settings", icon: Settings },
 ]
+
 
 export function AppSidebar() {
     return (
@@ -58,25 +53,6 @@ export function AppSidebar() {
                     <SidebarGroupContent>
                         <SidebarMenu>
                             {mainNav.map((item) => (
-                                <SidebarMenuItem key={item.title}>
-                                    <SidebarMenuButton
-                                        tooltip={item.title}
-                                        render={<Link href={item.url} />}
-                                    >
-                                        <item.icon />
-                                        <span>{item.title}</span>
-                                    </SidebarMenuButton>
-                                </SidebarMenuItem>
-                            ))}
-                        </SidebarMenu>
-                    </SidebarGroupContent>
-                </SidebarGroup>
-
-                <SidebarGroup>
-                    <SidebarGroupLabel>Workspace</SidebarGroupLabel>
-                    <SidebarGroupContent>
-                        <SidebarMenu>
-                            {projectNav.map((item) => (
                                 <SidebarMenuItem key={item.title}>
                                     <SidebarMenuButton
                                         tooltip={item.title}
