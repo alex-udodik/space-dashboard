@@ -56,7 +56,7 @@ export function BoosterFleetBarChart() {
                 <CardTitle>Booster fleet leaders</CardTitle>
                 <CardDescription>Flights flown per first-stage booster</CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="flex-1">
                 <ChartContainer config={chartConfig}>
                     <BarChart
                         accessibilityLayer

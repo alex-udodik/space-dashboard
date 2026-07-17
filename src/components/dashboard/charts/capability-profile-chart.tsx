@@ -80,7 +80,7 @@ export function CapabilityProfileChart() {
                     </RadarChart>
                 </ChartContainer>
             </CardContent>
-            <CardFooter className="flex-col gap-2 text-sm">
+            <CardFooter className="flex-col items-start gap-2 text-sm">
                 <div className="flex items-center gap-2 leading-none font-medium">
                     Starship leads on mass; Falcon 9 on cadence &amp; crew{" "}
                     <TrendingUp className="h-4 w-4" />

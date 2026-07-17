@@ -50,7 +50,7 @@ export function StarLinkChart() {
                     Active satellites in orbit
                 </CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="flex-1">
                 <ChartContainer config={chartConfig}>
                     <AreaChart
                         accessibilityLayer

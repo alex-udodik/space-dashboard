@@ -124,9 +124,9 @@ export function Dashboard() {
             <RecentLaunchesTable />
 
             <div className="rounded-xl border bg-card p-5 text-card-foreground shadow-sm">
-                <h2 className="text-base font-semibold">Recent activity</h2>
+                <h2 className="text-base font-semibold">Disclaimer</h2>
                 <p className="mt-2 text-sm text-muted-foreground">
-                    Nothing here yet. This is a placeholder panel for your main content.
+                    This data provided to these charts was generate with AI.
                 </p>
             </div>
         </div>

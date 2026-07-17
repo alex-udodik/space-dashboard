@@ -49,13 +49,18 @@ export function LaunchEconomicsChart() {
             .then((json) => setChartData(json.data))
     }, [])
 
+    const first = chartData[0]
+    const last = chartData.at(-1)
+    const costDrop =
+        first && last ? ((first.costPerKg - last.costPerKg) / first.costPerKg) * 100 : 0
+
     return (
         <Card>
             <CardHeader>
                 <CardTitle>Launch economics</CardTitle>
                 <CardDescription>Annual launches vs. cost per kg to LEO</CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="flex-1">
                 <ChartContainer config={chartConfig}>
                     <ComposedChart accessibilityLayer data={chartData}>
                         <CartesianGrid vertical={false} />
@@ -102,10 +107,10 @@ export function LaunchEconomicsChart() {
             </CardContent>
             <CardFooter className="flex-col items-start gap-2 text-sm">
                 <div className="flex gap-2 leading-none font-medium">
-                    Cost per kg down ~62% since 2019 <TrendingDown className="h-4 w-4" />
+                    Cost per kg down {costDrop.toFixed(0)}% since {first?.year}<TrendingDown className="h-4 w-4" />
                 </div>
                 <div className="leading-none text-muted-foreground">
-                    Reuse and the Starship ramp keep pushing $/kg lower
+                    {last ? `$${last.costPerKg.toLocaleString()}/kg to LEO in ${last.year}` : ""}
                 </div>
             </CardFooter>
         </Card>

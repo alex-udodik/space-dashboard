@@ -54,13 +54,25 @@ export function BoosterRecoveryStackedBarChart() {
             .then((json) => setChartData(json.data))
     }, [])
 
+    const totals = chartData.reduce(
+        (acc, d) => ({
+            droneship: acc.droneship + d.droneship,
+            ground: acc.ground + d.ground,
+            expended: acc.expended + d.expended,
+        }),
+        { droneship: 0, ground: 0, expended: 0 },
+    )
+    const landed = totals.droneship + totals.ground
+    const attempted = landed + totals.expended
+    const recoveryRate = attempted ? (landed / attempted) * 100 : 0
+
     return (
         <Card>
             <CardHeader>
                 <CardTitle>Booster recovery</CardTitle>
                 <CardDescription>Falcon landings by method, Jan–Jun 2026</CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="flex-1">
                 <ChartContainer config={chartConfig}>
                     <BarChart accessibilityLayer data={chartData}>
                         <CartesianGrid vertical={false} />
@@ -95,10 +107,10 @@ export function BoosterRecoveryStackedBarChart() {
             </CardContent>
             <CardFooter className="flex-col items-start gap-2 text-sm">
                 <div className="flex gap-2 leading-none font-medium">
-                    Recovery rate holding above 95% <TrendingUp className="h-4 w-4" />
+                    {recoveryRate.toFixed(1)}% recovery rate this year<TrendingUp className="h-4 w-4" />
                 </div>
                 <div className="leading-none text-muted-foreground">
-                    Droneship landings dominate; expendable flights are rare
+                    {landed} of {attempted} boosters recovered, droneship leads
                 </div>
             </CardFooter>
         </Card>
