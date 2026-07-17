@@ -1,0 +1,10 @@
+{
+  "data": [
+    { "metric": "Payload to LEO", "falcon9": 22, "starship": 100 },
+    { "metric": "Reusability", "falcon9": 90, "starship": 75 },
+    { "metric": "Cadence", "falcon9": 95, "starship": 30 },
+    { "metric": "Cost efficiency", "falcon9": 78, "starship": 88 },
+    { "metric": "Reliability", "falcon9": 99, "starship": 45 },
+    { "metric": "Crew rating", "falcon9": 92, "starship": 25 }
+  ]
+}

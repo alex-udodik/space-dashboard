@@ -1,5 +1,6 @@
 "use client"
 
+import * as React from "react"
 import { TrendingUp } from "lucide-react"
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts"
 
@@ -20,34 +21,44 @@ import {
     type ChartConfig,
 } from "@/components/ui/chart"
 
-export const description = "A stacked bar chart with a legend"
-
-const chartData = [
-    { month: "January", desktop: 186, mobile: 80 },
-    { month: "February", desktop: 305, mobile: 200 },
-    { month: "March", desktop: 237, mobile: 120 },
-    { month: "April", desktop: 73, mobile: 190 },
-    { month: "May", desktop: 209, mobile: 130 },
-    { month: "June", desktop: 214, mobile: 140 },
-]
+export const description = "Booster recoveries per month by landing method"
 
 const chartConfig = {
-    desktop: {
-        label: "Desktop",
-        color: "var(--chart-1)",
+    droneship: {
+        label: "Droneship (ASDS)",
+        color: "#4E86CA",
     },
-    mobile: {
-        label: "Mobile",
-        color: "var(--chart-2)",
+    ground: {
+        label: "Ground pad (RTLS)",
+        color: "#A28CF9",
+    },
+    expended: {
+        label: "Expended",
+        color: "#E0A458",
     },
 } satisfies ChartConfig
 
-export function MissionMixStackedbarChart() {
+type RecoveryDatum = {
+    month: string
+    droneship: number
+    ground: number
+    expended: number
+}
+
+export function BoosterRecoveryStackedBarChart() {
+    const [chartData, setChartData] = React.useState<RecoveryDatum[]>([])
+
+    React.useEffect(() => {
+        fetch("/api/booster-recovery")
+            .then((res) => res.json())
+            .then((json) => setChartData(json.data))
+    }, [])
+
     return (
         <Card>
             <CardHeader>
-                <CardTitle>Bar Chart - Stacked + Legend</CardTitle>
-                <CardDescription>January - June 2024</CardDescription>
+                <CardTitle>Booster recovery</CardTitle>
+                <CardDescription>Falcon landings by method, Jan–Jun 2026</CardDescription>
             </CardHeader>
             <CardContent>
                 <ChartContainer config={chartConfig}>
@@ -60,18 +71,23 @@ export function MissionMixStackedbarChart() {
                             axisLine={false}
                             tickFormatter={(value) => value.slice(0, 3)}
                         />
-                        <ChartTooltip content={<ChartTooltipContent hideLabel />} />
+                        <ChartTooltip content={<ChartTooltipContent />} />
                         <ChartLegend content={<ChartLegendContent />} />
                         <Bar
-                            dataKey="desktop"
+                            dataKey="droneship"
                             stackId="a"
-                            fill="var(--color-desktop)"
+                            fill="var(--color-droneship)"
                             radius={[0, 0, 4, 4]}
                         />
                         <Bar
-                            dataKey="mobile"
+                            dataKey="ground"
                             stackId="a"
-                            fill="var(--color-mobile)"
+                            fill="var(--color-ground)"
+                        />
+                        <Bar
+                            dataKey="expended"
+                            stackId="a"
+                            fill="var(--color-expended)"
                             radius={[4, 4, 0, 0]}
                         />
                     </BarChart>
@@ -79,10 +95,10 @@ export function MissionMixStackedbarChart() {
             </CardContent>
             <CardFooter className="flex-col items-start gap-2 text-sm">
                 <div className="flex gap-2 leading-none font-medium">
-                    Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
+                    Recovery rate holding above 95% <TrendingUp className="h-4 w-4" />
                 </div>
                 <div className="leading-none text-muted-foreground">
-                    Showing total visitors for the last 6 months
+                    Droneship landings dominate; expendable flights are rare
                 </div>
             </CardFooter>
         </Card>

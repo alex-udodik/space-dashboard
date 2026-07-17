@@ -1,0 +1,10 @@
+{
+  "data": [
+    { "month": "January", "droneship": 11, "ground": 3, "expended": 1 },
+    { "month": "February", "droneship": 12, "ground": 2, "expended": 1 },
+    { "month": "March", "droneship": 10, "ground": 4, "expended": 1 },
+    { "month": "April", "droneship": 13, "ground": 3, "expended": 0 },
+    { "month": "May", "droneship": 11, "ground": 3, "expended": 2 },
+    { "month": "June", "droneship": 12, "ground": 4, "expended": 1 }
+  ]
+}

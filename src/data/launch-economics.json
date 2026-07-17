@@ -1,0 +1,12 @@
+{
+  "data": [
+    { "year": "2019", "launches": 13, "costPerKg": 2900 },
+    { "year": "2020", "launches": 26, "costPerKg": 2700 },
+    { "year": "2021", "launches": 31, "costPerKg": 2500 },
+    { "year": "2022", "launches": 61, "costPerKg": 2300 },
+    { "year": "2023", "launches": 96, "costPerKg": 2000 },
+    { "year": "2024", "launches": 134, "costPerKg": 1700 },
+    { "year": "2025", "launches": 160, "costPerKg": 1400 },
+    { "year": "2026", "launches": 94, "costPerKg": 1100 }
+  ]
+}

@@ -10,7 +10,7 @@ import { TrendingUp } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { LaunchCadenceChart } from "@/components/dashboard/charts/launch-cadence-chart"
 import { PayloadOrbitDonutChart } from "./charts/payload-orbit-donut-chart"
-import { MissionMixStackedbarChart } from "./charts/mission-mix-stacked-bar-chart"
+import { BoosterRecoveryStackedBarChart } from "./charts/booster-recovery-stacked-bar-chart"
 import { StarLinkChart } from "./charts/starlink-chart"
 import { BoosterFleetBarChart } from "./charts/booster-fleet-leaders-bar-chart"
 import { SPCXPriceLineChart } from "./charts/spcx-price-line-chart"
@@ -19,6 +19,7 @@ import { CapabilityProfileChart } from "./charts/capability-profile-chart"
 import { LaunchGlobe } from "./charts/launch-globe"
 import { LightDarkSwitch } from "@/components/light-dark-toggle-switch"
 import { CountDownNextLaunch } from "@/components/dashboard/charts/countdown-next-launch"
+import { LaunchEconomicsChart } from "@/components/dashboard/charts/launch-economics-chart"
 
 
 export function Dashboard() {
@@ -109,9 +110,10 @@ export function Dashboard() {
                 <StarLinkChart />
                 <BoosterFleetBarChart />
                 <SPCXPriceLineChart />
-                <MissionMixStackedbarChart />
+                <BoosterRecoveryStackedBarChart />
                 <CapabilityProfileChart />
                 <CountDownNextLaunch />
+                <LaunchEconomicsChart />
             </div>
 
 
